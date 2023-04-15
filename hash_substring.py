@@ -50,8 +50,8 @@ def get_occurrences(pattern, text):
         if i==1:
             xpow[i-1]=1
             for j in range(m):
-            phash=(phash*x+ord(pattern[j])%p)
-            thash[i-1]=(thash[i-1]*x+ord(text[j]))%p
+                phash=(phash*x+ord(pattern[j])%p)
+                thash[i-1]=(thash[i-1]*x+ord(text[j]))%p
         else:
             xpow[i-1]=(xpow[i-2]*x)%p
             thash[i-1]=((thash[i-2]-ord(text[i-2])*xpow[i-2])*x+ord(text[i+m-2]))%p
