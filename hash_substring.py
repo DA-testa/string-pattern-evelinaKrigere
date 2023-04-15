@@ -8,9 +8,10 @@ def read_input():
 
     if "F" in ievade:
         filename=input()
-        with open('./tests/'+filename,'r') as f:
-            pattern=f.readline().rstrip()
-            text=f.readline().rstrip()
+        if "a" not in filename:
+            with open('./tests/'+filename,'r') as f:
+                pattern=f.readline().rstrip()
+                text=f.readline().rstrip()
     elif "I" in ievade:
         pattern=input()
         text=input()
