@@ -9,8 +9,8 @@ def read_input():
     if input1=='F':
         filename=input()
         with open(filename,'r') as f:
-            pattern=f.readline()
-            text=f.readline()
+            pattern=f.readline().rstrip()
+            text=f.readline().rstrip()
     else:
         pattern=input()
         text=input()
@@ -26,7 +26,7 @@ def read_input():
     
     # this is the sample return, notice the rstrip function
     #return (input().rstrip(), input().rstrip())
-    return(pattern,text)
+    return pattern, text 
 
 def print_occurrences(output):
     # this function should control output, it doesn't need any return
@@ -44,13 +44,13 @@ def get_occurrences(pattern, text):
 
     phash=0
     thash=[0]*(n-m+1)
-    xpow=[1]*(n-m+1)
+    xpow=[1]*(n-m+2)
 
     for i in range(1,n-m+2):
         if i==1:
             xpow[i-1]=1
             for j in range(m):
-                phash=(phash*x+ord(pattern[j])%p)
+                phash=(phash*x+ord(pattern[j]))%p
                 thash[i-1]=(thash[i-1]*x+ord(text[j]))%p
         else:
             xpow[i-1]=(xpow[i-2]*x)%p
