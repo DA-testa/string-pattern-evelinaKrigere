@@ -13,8 +13,9 @@ def read_input():
                 pattern=f.readline().rstrip()
                 text=f.readline().rstrip()
     elif "I" in ievade:
-        pattern=input()
-        text=input()
+        data = list(map(int, input().split()))
+        pattern = str(data[0])
+        text = " ".join(str(x) for x in data[1:])
 
 
     
