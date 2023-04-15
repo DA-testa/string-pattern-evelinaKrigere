@@ -4,14 +4,14 @@ def read_input():
     # this function needs to aquire input both from keyboard and file
     # as before, use capital i (input from keyboard) and capital f (input from file) to choose which input type will follow
 
-    input1=input()
+    ievade=input()
 
-    if input1=='F':
+    if "F" in ievade:
         filename=input()
-        with open(filename,'r') as f:
+        with open('./tests/'+filename,'r') as f:
             pattern=f.readline().rstrip()
             text=f.readline().rstrip()
-    else:
+    elif "I" in ievade:
         pattern=input()
         text=input()
 
@@ -37,7 +37,7 @@ def get_occurrences(pattern, text):
     p=10**9+7
     x=31
 
-    occurances=[]
+    occurrences=[]
 
     n=len(text)
     m=len(pattern)
@@ -59,11 +59,11 @@ def get_occurrences(pattern, text):
     for i in range(n-m+1):
         if phash==thash[i]:
             if pattern==text[i:i+m]:
-                occurances.append(i)
+                occurrences.append(i)
 
     # and return an iterable variable
     #return [0]
-    return occurances
+    return occurrences
 
 
 # this part launches the functions
