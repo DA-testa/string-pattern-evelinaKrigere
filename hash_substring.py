@@ -8,14 +8,16 @@ def read_input():
 
     if "F" in ievade:
         filename=input()
-        if "a" not in filename:
-            with open('./tests/'+filename,'r') as f:
-                pattern=f.readline().rstrip()
-                text=f.readline().rstrip()
-    elif "I" in ievade:
-        data = list(map(int, input().split()))
-        pattern = str(data[0])
-        text = " ".join(str(x) for x in data[1:])
+        with open('./tests/'+filename,'r') as f:
+            pattern=f.readline().rstrip()
+            text=f.readline().rstrip()
+            return(pattern,text)
+    if "I" in ievade:
+        pattern=input().rstrip()
+        text=input().rstrip()
+        return(pattern,text)
+        
+        
 
 
     
@@ -27,8 +29,8 @@ def read_input():
     # return both lines in one return
     
     # this is the sample return, notice the rstrip function
-    #return (input().rstrip(), input().rstrip())
-    return pattern, text 
+    return (input().rstrip(), input().rstrip())
+    
 
 def print_occurrences(output):
     # this function should control output, it doesn't need any return
@@ -45,23 +47,21 @@ def get_occurrences(pattern, text):
     m=len(pattern)
 
     phash=0
-    thash=[0]*(n-m+1)
-    xpow=[1]*(n-m+2)
+    thash=0
+    xpow=1
 
-    for i in range(1,n-m+2):
-        if i==1:
-            xpow[i-1]=1
-            for j in range(m):
-                phash=(phash*x+ord(pattern[j]))%p
-                thash[i-1]=(thash[i-1]*x+ord(text[j]))%p
-        else:
-            xpow[i-1]=(xpow[i-2]*x)%p
-            thash[i-1]=((thash[i-2]-ord(text[i-2])*xpow[i-2])*x+ord(text[i+m-2]))%p
+    for i in range(m):
+        phash=(phash*x+ord(pattern[i]))%p
+        thash=(thash*x+ord(text[i]))%p
+        if i < m-1:
+            xpow = (xpow*x)%p
 
     for i in range(n-m+1):
-        if phash==thash[i]:
+        if phash==thash:
             if pattern==text[i:i+m]:
                 occurrences.append(i)
+        if i < n-m:
+            thash = ((thash-ord(text[i])*xpow)*x+ord(text[i+m]))%p
 
     # and return an iterable variable
     #return [0]
