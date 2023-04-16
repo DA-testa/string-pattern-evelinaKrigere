@@ -7,14 +7,16 @@ def read_input():
     ievade=input()
 
     if "F" in ievade:
-        filename=input()
-        with open('./tests/'+filename,'r') as f:
+        path='./tests/'+'06'
+        with open(path,'r') as f:
             pattern=f.readline().rstrip()
             text=f.readline().rstrip()
+
             return(pattern,text)
     if "I" in ievade:
         pattern=input().rstrip()
         text=input().rstrip()
+        
         return(pattern,text)
         
         
